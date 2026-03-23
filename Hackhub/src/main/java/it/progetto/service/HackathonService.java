@@ -1,12 +1,13 @@
 package it.progetto.service;
 
+import it.progetto.dto.HackathonDTO;
 import it.progetto.dto.HackathonRequest;
 import it.progetto.model.*;
 import java.time.LocalDate;
 
 public class HackathonService {
 
-    public void requestHackathon(HackathonRequest request) {
+    public HackathonDTO requestHackathon(HackathonRequest request) {
 
         // Self Message: checkRequest
         System.out.println("Service: Eseguo checkRequest...");
@@ -14,19 +15,18 @@ public class HackathonService {
 
             // Messaggio: createHackathon(request)
             System.out.println("Service: Check superato. Avvio createHackathon tramite Builder...");
-            this.createHackathon(request);
+            return this.createHackathon(request);
         } else {
             System.out.println("Service: Check fallito! Dati non validi.");
+            return null;
         }
     }
 
     private boolean checkRequest(HackathonRequest request) {
-        // Un controllo rapido: il nome non deve essere vuoto e il premio positivo
         return request.getNome() != null && !request.getNome().isEmpty() && request.getPremio() >= 0;
     }
 
-    private void createHackathon(HackathonRequest request) {
-        // Qui usiamo il Builder come abbiamo studiato
+    private HackathonDTO createHackathon(HackathonRequest request) {
         HackathonBuilder builder = new ConcreteHackathonBuilder();
 
         builder.reset();
@@ -45,5 +45,7 @@ public class HackathonService {
         System.out.println("Premio:         " + h.getPremio() + "€");
         System.out.println("ID Organizzatore: " + h.getOrganizzatoreID());
         System.out.println("-------------------------------------------\n");
+
+        return new HackathonDTO(h.getNome(), h.getDataInizio(), h.getDataFine(), h.getPremio(), h.getOrganizzatoreID());
     }
 }

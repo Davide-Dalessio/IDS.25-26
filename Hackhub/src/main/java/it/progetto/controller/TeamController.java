@@ -1,5 +1,6 @@
 package it.progetto.controller;
 
+import it.progetto.dto.TeamDTO;
 import it.progetto.dto.TeamRequest;
 import it.progetto.service.TeamService;
 
@@ -19,10 +20,10 @@ public class TeamController {
         }
     }
 
-    public void sendDati(String nomeTeam, int utenteID) {
+    public TeamDTO sendDati(String nomeTeam, int utenteID) {
         TeamRequest request = this.createRequest(nomeTeam, utenteID);
 
-        teamService.requestTeam(request);
+        return teamService.requestTeam(request);
     }
 
     private TeamRequest createRequest(String nome, int id) {

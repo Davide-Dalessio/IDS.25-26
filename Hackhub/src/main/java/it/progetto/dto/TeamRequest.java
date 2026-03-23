@@ -9,6 +9,8 @@ public class TeamRequest {
         this.utenteID = utenteID;
     }
 
+    public TeamRequest() {}
+
     public String getNomeTeam() {return nomeTeam;}
     public int getUtenteID() {return utenteID;}
 

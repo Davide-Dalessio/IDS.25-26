@@ -11,6 +11,9 @@ public class SlotRequest {
         this.teamId = teamId;
     }
 
+    public SlotRequest() {
+    }
+
     public int getSlotId() {
         return slotId;
     }

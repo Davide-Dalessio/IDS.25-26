@@ -1,5 +1,6 @@
 package it.progetto.service;
 
+import it.progetto.dto.TeamDTO;
 import it.progetto.dto.TeamRequest;
 import it.progetto.model.*;
 
@@ -12,7 +13,7 @@ public class TeamService {
         return true;
     }
 
-    public void requestTeam(TeamRequest request) {
+    public TeamDTO requestTeam(TeamRequest request) {
         this.selfCheck(request);
 
         TeamBuilder builder = new ConcreteTeamBuilder();
@@ -26,6 +27,8 @@ public class TeamService {
         this.updateUserTeam(request.getUtenteID(), 1); // ID team simulato = 1
 
         System.out.println("Successo: Team " + team.getNome() + " creato con ID membri: " + team.getMembriIDs());
+
+        return new TeamDTO(1, team.getNome(), team.getMembriIDs());
     }
 
     private void selfCheck(TeamRequest request) {

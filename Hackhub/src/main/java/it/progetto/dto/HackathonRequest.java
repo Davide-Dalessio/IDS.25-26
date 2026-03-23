@@ -1,6 +1,5 @@
 package it.progetto.dto;
 
-
 public class HackathonRequest {
     private String nome;
     private String dataInizio;
@@ -16,17 +15,46 @@ public class HackathonRequest {
         this.organizzatoreID = organizzatoreID;
     }
 
-    public HackathonRequest() {}
+    public HackathonRequest() {
+    }
 
-    public String getNome() {return nome;}
-    public String getDataInizio() {return dataInizio;}
-    public String getDataFine() {return dataFine;}
-    public double getPremio() {return premio;}
-    public int getOrganizzatoreID() {return organizzatoreID;}
+    public String getNome() {
+        return nome;
+    }
 
-    public void setNome(String nome) {this.nome = nome;}
-    public void setDataInizio(String dataInizio) {this.dataInizio = dataInizio;}
-    public void setDataFine(String dataFine) {this.dataFine = dataFine;}
-    public void setPremio(double premio) {this.premio = premio;}
-    public void setOrganizzatoreID(int organizzatoreID) {this.organizzatoreID = organizzatoreID;}
+    public String getDataInizio() {
+        return dataInizio;
+    }
+
+    public String getDataFine() {
+        return dataFine;
+    }
+
+    public double getPremio() {
+        return premio;
+    }
+
+    public int getOrganizzatoreID() {
+        return organizzatoreID;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataInizio(String dataInizio) {
+        this.dataInizio = dataInizio;
+    }
+
+    public void setDataFine(String dataFine) {
+        this.dataFine = dataFine;
+    }
+
+    public void setPremio(double premio) {
+        this.premio = premio;
+    }
+
+    public void setOrganizzatoreID(int organizzatoreID) {
+        this.organizzatoreID = organizzatoreID;
+    }
 }

@@ -9,13 +9,16 @@ public class CallRequest {
     private final String periodo;
 
     public CallRequest(int requestId, int mentorId, int hackathonId,
-                       String durata, String note, String periodo) {
+            String durata, String note, String periodo) {
         this.requestId = requestId;
         this.mentorId = mentorId;
         this.hackathonId = hackathonId;
         this.durata = durata;
         this.note = note;
         this.periodo = periodo;
+    }
+
+    public CallRequest() {
     }
 
     public int getRequestId() {
@@ -42,4 +45,3 @@ public class CallRequest {
         return periodo;
     }
 }
-
