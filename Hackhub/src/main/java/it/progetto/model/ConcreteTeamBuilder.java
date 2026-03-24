@@ -18,8 +18,8 @@ public class ConcreteTeamBuilder implements TeamBuilder {
     }
 
     @Override
-    public void aggiungiMembroIniziale(int utenteID) {
-        this.team.aggiungiMembro(utenteID);
+    public void aggiungiMembroIniziale(Utente utente) {
+        this.team.aggiungiMembro(utente);
     }
 
     @Override

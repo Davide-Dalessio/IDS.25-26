@@ -6,23 +6,35 @@ import java.util.List;
 public class Team {
     private int id;
     private String nome;
-    private List<Integer> membriIDs;
+    private List<Utente> membri;
 
     public Team() {
-        this.membriIDs = new ArrayList<>();
+        this.membri = new ArrayList<>();
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public List<Integer> getMembriIDs() { return membriIDs; }
+    public String getNome() {
+        return nome;
+    }
 
-    public void aggiungiMembro(int utenteID) {
-        if (!this.membriIDs.contains(utenteID)) {
-            this.membriIDs.add(utenteID);
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Utente> getMembri() {
+        return membri;
+    }
+
+    public void aggiungiMembro(Utente utente) {
+        if (!this.membri.contains(utente)) {
+            this.membri.add(utente);
         }
     }
 }

@@ -19,16 +19,17 @@ public class TeamService {
         TeamBuilder builder = new ConcreteTeamBuilder();
         builder.reset();
         builder.setNome(request.getNomeTeam());
-        builder.aggiungiMembroIniziale(request.getUtenteID());
+        Utente creatore = getUtenteById(request.getUtenteID());
+        builder.aggiungiMembroIniziale(creatore);
 
         Team team = builder.getResult();
 
         this.save(team);
         this.updateUserTeam(request.getUtenteID(), 1); // ID team simulato = 1
 
-        System.out.println("Successo: Team " + team.getNome() + " creato con ID membri: " + team.getMembriIDs());
+        System.out.println("Successo: Team " + team.getNome() + " creato con membri: " + team.getMembri());
 
-        return new TeamDTO(1, team.getNome(), team.getMembriIDs());
+        return new TeamDTO(1, team.getNome(), team.getMembri());
     }
 
     private void selfCheck(TeamRequest request) {
@@ -43,5 +44,9 @@ public class TeamService {
 
     private void updateUserTeam(int uId, int tId) {
         System.out.println("Repo: Utente " + uId + " collegato al team " + tId);
+    }
+
+    private Utente getUtenteById(int id) {
+        return new Utente(id, "Utente-" + id, "utente" + id + "@email.it");
     }
 }
