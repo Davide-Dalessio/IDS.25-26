@@ -9,5 +9,7 @@ public interface HackathonBuilder {
     void setDataFine(LocalDate fine);
     void setPremio(double premio);
     void setOrganizzatoreID(int id);
+    void setStato(StatoHackathon stato);
+    void setMaxMembriTeam(int max);
     Hackathon getResult();
 }

@@ -7,6 +7,8 @@ public class Hackathon {
     private LocalDate dataInizio, dataFine;
     private double premio;
     private int organizzatoreID;
+    private StatoHackathon stato;
+    private int maxMembriTeam;
 
     public Hackathon() {
     }
@@ -31,6 +33,14 @@ public class Hackathon {
         this.organizzatoreID = organizzatoreID;
     }
 
+    public void setStato(StatoHackathon stato) {
+        this.stato = stato;
+    }
+    
+    public void setMaxMembriTeam(int maxMembriTeam) {
+        this.maxMembriTeam = maxMembriTeam;
+    }
+
     public String getNome() {
         return this.nome;
     }
@@ -50,4 +60,14 @@ public class Hackathon {
     public int getOrganizzatoreID() {
         return this.organizzatoreID;
     }
+
+    public StatoHackathon getStato() {
+        return this.stato;
+    }
+
+
+    public int getMaxMembriTeam() {
+        return this.maxMembriTeam;
+    }
+
 }

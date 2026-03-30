@@ -3,6 +3,7 @@ package it.progetto;
 import it.progetto.view.ICreazioneTeam;
 import it.progetto.view.CallView;
 import it.progetto.view.PrenotazioneSlotUI;
+import it.progetto.view.IIscrizioneTeam;
 
 public class Main {
     public static void main(String[] args) {
@@ -61,5 +62,23 @@ public class Main {
                 1,
                 5
         );
+
+        // ===============================
+        // TEST ISCRIZIONE TEAM AD HACKATHON
+        // ===============================
+
+        IIscrizioneTeam iscrizioneUI = new IIscrizioneTeam();
+
+        System.out.println("\n--- TEST ISCRIZIONE VALIDA ---");
+        iscrizioneUI.iscriviTeam(1, 1);
+
+        System.out.println("\n--- TEST TEAM GIÀ ISCRITTO ---");
+        iscrizioneUI.iscriviTeam(1, 1);
+
+        System.out.println("\n--- TEST ISCRIZIONI CHIUSE ---");
+        iscrizioneUI.iscriviTeam(1, 2);
+
+        System.out.println("\n--- TEST DIMENSIONE TEAM SUPERIORE AL LIMITE ---");
+        iscrizioneUI.iscriviTeam(99, 1);
     }
 }

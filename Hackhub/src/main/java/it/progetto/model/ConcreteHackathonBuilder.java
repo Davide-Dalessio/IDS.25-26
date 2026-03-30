@@ -41,6 +41,16 @@ public class ConcreteHackathonBuilder implements HackathonBuilder {
     }
 
     @Override
+    public void setStato(StatoHackathon stato) {
+        this.hackathon.setStato(stato);
+    }
+
+    @Override
+    public void setMaxMembriTeam(int max) {
+        this.hackathon.setMaxMembriTeam(max);
+    }
+
+    @Override
     public Hackathon getResult() {
         // Restituisce l'oggetto finito
         Hackathon product = this.hackathon;
