@@ -4,6 +4,7 @@ import it.progetto.view.ICreazioneTeam;
 import it.progetto.view.CallView;
 import it.progetto.view.PrenotazioneSlotUI;
 import it.progetto.view.IIscrizioneTeam;
+import it.progetto.view.IInviaSottomissione;
 
 public class Main {
     public static void main(String[] args) {
@@ -80,5 +81,23 @@ public class Main {
 
         System.out.println("\n--- TEST DIMENSIONE TEAM SUPERIORE AL LIMITE ---");
         iscrizioneUI.iscriviTeam(99, 1);
+
+        // ===============================
+        // TEST INVIO SOTTOMISSIONE
+        // ===============================
+
+        IInviaSottomissione sottomissioneUI = new IInviaSottomissione();
+
+        System.out.println("\n--- TEST TEAM NON ISCRITTO ---");
+        sottomissioneUI.inviaSottomissione(99, 1);
+
+        System.out.println("\n--- TEST SCADENZA SUPERATA ---");
+        sottomissioneUI.inviaSottomissione(1, 2);
+
+        System.out.println("\n--- TEST INVIO VALIDO (inserire un link) ---");
+        sottomissioneUI.inviaSottomissione(1, 1);
+
+        System.out.println("\n--- TEST SOTTOMISSIONE GIÀ PRESENTE ---");
+        sottomissioneUI.inviaSottomissione(1, 1);
     }
 }
