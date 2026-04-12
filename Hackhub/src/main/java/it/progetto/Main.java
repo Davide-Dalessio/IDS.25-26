@@ -5,6 +5,8 @@ import it.progetto.view.CallView;
 import it.progetto.view.PrenotazioneSlotUI;
 import it.progetto.view.IIscrizioneTeam;
 import it.progetto.view.IInviaSottomissione;
+import it.progetto.view.IValutazioneSottomissione;
+import it.progetto.view.IAccedereSottomissioni;
 
 public class Main {
     public static void main(String[] args) {
@@ -99,5 +101,99 @@ public class Main {
 
         System.out.println("\n--- TEST SOTTOMISSIONE GIÀ PRESENTE ---");
         sottomissioneUI.inviaSottomissione(1, 1);
+
+        // ================================
+        // TEST VALUTARE SOTTOMISSIONE
+        // ================================
+
+        IValutazioneSottomissione valutazioneUI = new IValutazioneSottomissione();
+
+        System.out.println("\n--- TEST VALUTAZIONE VALIDA ---");
+        valutazioneUI.valutaSottomissione(
+                7,                  // giudiceId
+                1,                  // hackathonId
+                101,                // submissionId
+                "Buon progetto, ben strutturato.",
+                8                   // punteggio
+        );
+
+        System.out.println("\n--- TEST GIUDICE NON ASSEGNATO ---");
+        valutazioneUI.valutaSottomissione(
+                99,                 // giudiceId non assegnato
+                1,
+                101,
+                "Tentativo non valido.",
+                7
+        );
+
+        System.out.println("\n--- TEST HACKATHON NON IN VALUTAZIONE ---");
+        valutazioneUI.valutaSottomissione(
+                7,
+                2,                  // hackathonId con stato non valido
+                101,
+                "Test hackathon chiuso.",
+                6
+        );
+
+        System.out.println("\n--- TEST NESSUNA SOTTOMISSIONE ---");
+        valutazioneUI.valutaSottomissione(
+                7,
+                3,                  // hackathonId senza submissions
+                999,
+                "Nessuna submission.",
+                5
+        );
+
+        System.out.println("\n--- TEST PUNTEGGIO NON VALIDO ---");
+        valutazioneUI.valutaSottomissione(
+                7,
+                1,
+                101,
+                "Punteggio fuori range.",
+                15                  // non valido
+        );
+
+        System.out.println("\n--- TEST COMMENTO MANCANTE ---");
+        valutazioneUI.valutaSottomissione(
+                7,
+                1,
+                101,
+                "",
+                7
+        );
+
+        // ================================
+// TEST ACCESSO ALLE SOTTOMISSIONI
+// ================================
+
+        IAccedereSottomissioni accessoSottomissioniUI = new IAccedereSottomissioni();
+
+        System.out.println("\n--- TEST ACCESSO SOTTOMISSIONE VALIDO ---");
+        accessoSottomissioniUI.accediAlleSottomissioni(
+                20,   // staffId assegnato
+                1,    // hackathon valido
+                1     // team con submission
+        );
+
+        System.out.println("\n--- TEST HACKATHON NON ESISTENTE ---");
+        accessoSottomissioniUI.accediAlleSottomissioni(
+                20,
+                999,  // hackathon non esistente
+                1
+        );
+
+        System.out.println("\n--- TEST STAFF NON ASSEGNATO ---");
+        accessoSottomissioniUI.accediAlleSottomissioni(
+                99,   // staff non assegnato
+                1,
+                1
+        );
+
+        System.out.println("\n--- TEST SOTTOMISSIONE NON PRESENTE ---");
+        accessoSottomissioniUI.accediAlleSottomissioni(
+                20,
+                2,    // hackathon valido ma il team 3 non ha submission
+                3
+        );
     }
 }
