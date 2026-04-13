@@ -1,7 +1,11 @@
 package it.progetto.model;
 
-import it.progetto.dto.ValutazioneRequest;
-
 public interface ValutazioneBuilder {
-    Valutazione createValutazione(int id, ValutazioneRequest request);
+    void reset();
+
+    void setIds(int valutazioneId, int giudiceId, int hackathonId, int submissionId);
+
+    void setGiudizio(int punteggio, String commento);
+
+    Valutazione getResult();
 }

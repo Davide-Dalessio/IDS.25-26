@@ -10,6 +10,7 @@ import java.util.List;
 public class SottomissioneService {
 
     private final List<Sottomissione> sottomissioni = new ArrayList<>();
+    private int nextSottomissioneId = 101;
 
     public void checkValido(int teamId, int hackathonId) {
         checkIscrizione(teamId, hackathonId);
@@ -18,9 +19,9 @@ public class SottomissioneService {
     }
 
     public SottomissioneDTO sendSottomissione(SottomissioneRequest request) {
-        Sottomissione s = new Sottomissione(request.getTeamId(), request.getHackathonId(), request.getLink());
+        Sottomissione s = new Sottomissione(nextSottomissioneId++, request.getTeamId(), request.getHackathonId(), request.getLink());
         save(s);
-        return new SottomissioneDTO(s.getTeamId(), s.getHackathonId(), s.getLink());
+        return new SottomissioneDTO(s.getId(), s.getTeamId(), s.getHackathonId(), s.getLink());
     }
 
     private void checkIscrizione(int teamId, int hackathonId) {

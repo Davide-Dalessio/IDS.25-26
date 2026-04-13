@@ -9,7 +9,6 @@ import it.progetto.model.ValutazioneBuilder;
 import java.util.*;
 
 public class ValutazioneService {
-    private final ValutazioneBuilder valutazioneBuilder = new ConcreteValutazioneBuilder();
 
     private final Map<Integer, Set<Integer>> giudiceHackathonMap = new HashMap<>();
     private final Map<Integer, String> statoHackathonMap = new HashMap<>();
@@ -58,7 +57,12 @@ public class ValutazioneService {
 
         validateEvaluation(request.getPunteggio(), request.getCommento());
 
-        Valutazione valutazione = valutazioneBuilder.createValutazione(nextValutazioneId++, request);
+        ValutazioneBuilder builder = new ConcreteValutazioneBuilder();
+        builder.reset();
+        builder.setIds(nextValutazioneId++, request.getGiudiceId(), request.getHackathonId(), request.getSubmissionId());
+        builder.setGiudizio(request.getPunteggio(), request.getCommento());
+        
+        Valutazione valutazione = builder.getResult();
         valutazioniSalvate.add(valutazione);
 
         return new ValutazioneDTO(

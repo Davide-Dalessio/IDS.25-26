@@ -1,6 +1,7 @@
 package it.progetto.dto;
 
 import java.util.List;
+import it.progetto.model.Utente;
 
 public class TeamDTO {
     private final int id;
