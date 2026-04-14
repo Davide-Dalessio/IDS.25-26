@@ -7,7 +7,5 @@ public interface InvitoBuilder {
 
     void setUtenteInvitato(int utenteID);
 
-    void setStatoIniziale();
-
     Invito getResult();
 }

@@ -29,7 +29,6 @@ public class InvitoService {
         builder.reset();
         builder.setMittente(request.getMittenteID());
         builder.setUtenteInvitato(request.getUtenteID());
-        builder.setStatoIniziale();
 
         Invito invito = builder.getResult();
 
@@ -37,7 +36,7 @@ public class InvitoService {
 
         this.sendInvito(invito);
 
-        return new InvitoDTO(invito.getMittenteID(), invito.getUtenteID(), invito.getStato());
+        return new InvitoDTO(invito.getMittenteID(), invito.getUtenteID());
     }
 
     private boolean checkUtente(int utenteID) {

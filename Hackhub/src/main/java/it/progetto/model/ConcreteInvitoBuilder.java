@@ -23,11 +23,6 @@ public class ConcreteInvitoBuilder implements InvitoBuilder {
     }
 
     @Override
-    public void setStatoIniziale() {
-        this.invito.setStato("PENDING");
-    }
-
-    @Override
     public Invito getResult() {
         Invito result = this.invito;
         this.reset();

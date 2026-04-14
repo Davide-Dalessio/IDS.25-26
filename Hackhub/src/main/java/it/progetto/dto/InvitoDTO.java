@@ -3,12 +3,10 @@ package it.progetto.dto;
 public class InvitoDTO {
     private final int mittenteID;
     private final int utenteID;
-    private final String stato;
 
-    public InvitoDTO(int mittenteID, int utenteID, String stato) {
+    public InvitoDTO(int mittenteID, int utenteID) {
         this.mittenteID = mittenteID;
         this.utenteID = utenteID;
-        this.stato = stato;
     }
 
     public int getMittenteID() {
@@ -17,9 +15,5 @@ public class InvitoDTO {
 
     public int getUtenteID() {
         return this.utenteID;
-    }
-
-    public String getStato() {
-        return this.stato;
     }
 }
