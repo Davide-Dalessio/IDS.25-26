@@ -23,4 +23,9 @@ public class HackathonController {
     private HackathonRequest createRequest(String nome, String inizio, String fine, double premio, int utenteID) {
         return new HackathonRequest(nome, inizio, fine, premio, utenteID);
     }
+
+    public void aggiornaFasi() {
+        System.out.println("HackathonController: Inoltro la richiesta di aggiornamento al Service...");
+        hackathonService.aggiornaFasi();
+    }
 }

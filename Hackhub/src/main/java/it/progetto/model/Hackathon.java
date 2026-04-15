@@ -1,6 +1,8 @@
 package it.progetto.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hackathon {
     private String nome;
@@ -9,6 +11,7 @@ public class Hackathon {
     private int organizzatoreID;
     private StatoHackathon stato;
     private int maxMembriTeam;
+    private EventManager events = new EventManager();
 
     public Hackathon() {
     }
@@ -35,6 +38,12 @@ public class Hackathon {
 
     public void setStato(StatoHackathon stato) {
         this.stato = stato;
+        
+        if (stato == StatoHackathon.IN_CORSO) {
+            events.notify("cambio_fase", "L'Hackathon '" + this.nome + "' e' appena INIZIATO (fase IN CORSO)!");
+        } else if (stato == StatoHackathon.IN_VALUTAZIONE) {
+            events.notify("cambio_fase", "Stop ai lavori! L'Hackathon '" + this.nome + "' e' ora in fase di VALUTAZIONE!");
+        }
     }
     
     public void setMaxMembriTeam(int maxMembriTeam) {
@@ -70,4 +79,7 @@ public class Hackathon {
         return this.maxMembriTeam;
     }
 
+    public EventManager getEvents() {
+        return this.events;
+    }
 }
