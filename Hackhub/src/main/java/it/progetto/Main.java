@@ -7,6 +7,7 @@ import it.progetto.view.IIscrizioneTeam;
 import it.progetto.view.IInviaSottomissione;
 import it.progetto.view.IValutazioneSottomissione;
 import it.progetto.view.IAccedereSottomissioni;
+import it.progetto.view.IProclamaVincitore;
 
 public class Main {
     public static void main(String[] args) {
@@ -163,8 +164,8 @@ public class Main {
         );
 
         // ================================
-// TEST ACCESSO ALLE SOTTOMISSIONI
-// ================================
+        // TEST ACCESSO ALLE SOTTOMISSIONI
+        // ================================
 
         IAccedereSottomissioni accessoSottomissioniUI = new IAccedereSottomissioni();
 
@@ -194,6 +195,54 @@ public class Main {
                 20,
                 2,    // hackathon valido ma il team 3 non ha submission
                 3
+        );
+
+        // ================================
+        // TEST PROCLAMARE TEAM VINCITORE
+        // ================================
+
+        IProclamaVincitore proclamazioneUI = new IProclamaVincitore();
+
+        System.out.println("\n--- TEST PROCLAMAZIONE VALIDA ---");
+        proclamazioneUI.proclamaVincitore(
+                50,   // organizzatore assegnato
+                1,    // hackathon valido
+                3     // team vincitore
+        );
+
+        System.out.println("\n--- TEST ORGANIZZATORE NON AUTORIZZATO ---");
+        proclamazioneUI.proclamaVincitore(
+                99,   // organizzatore non assegnato
+                1,
+                3
+        );
+
+        System.out.println("\n--- TEST HACKATHON NON IN STATO CORRETTO ---");
+        proclamazioneUI.proclamaVincitore(
+                50,
+                3,    // hackathon non in stato IN_VALUTAZIONE
+                3
+        );
+
+        System.out.println("\n--- TEST NON TUTTE LE SOTTOMISSIONI VALUTATE ---");
+        proclamazioneUI.proclamaVincitore(
+                50,
+                2,    // hackathon con submissions non tutte valutate
+                4
+        );
+
+        System.out.println("\n--- TEST NESSUNA SOTTOMISSIONE ---");
+        proclamazioneUI.proclamaVincitore(
+                50,
+                4,    // hackathon senza submissions
+                1
+        );
+
+        System.out.println("\n--- TEST ERRORE PAGAMENTO ---");
+        proclamazioneUI.proclamaVincitore(
+                50,
+                1,
+                999   // team che simula errore pagamento
         );
     }
 }
