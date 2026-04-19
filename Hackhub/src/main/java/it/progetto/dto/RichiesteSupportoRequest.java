@@ -1,5 +1,6 @@
 package it.progetto.dto;
 
+/** Usato dal Mentore per rispondere a una richiesta di supporto esistente. */
 public class RichiesteSupportoRequest {
     private final int mentorId;
     private final int hackathonId;

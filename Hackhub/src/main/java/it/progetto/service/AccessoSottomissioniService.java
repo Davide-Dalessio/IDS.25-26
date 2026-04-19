@@ -34,6 +34,14 @@ public class AccessoSottomissioniService {
         return new ArrayList<>(hackathonEsistenti);
     }
 
+    public List<Integer> getHackathonListByStaff(int staffId) {
+        Set<Integer> assigned = staffHackathonMap.get(staffId);
+        if (assigned == null || assigned.isEmpty()) {
+            throw new IllegalArgumentException("Il membro dello staff non e' assegnato a nessun hackathon.");
+        }
+        return new ArrayList<>(assigned);
+    }
+
     public List<Integer> requestHackathonAccess(int staffId, int hackathonId) {
         checkHackathonExists(hackathonId);
         verifyStaffAssignment(hackathonId, staffId);

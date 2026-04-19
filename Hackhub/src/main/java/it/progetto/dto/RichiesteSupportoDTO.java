@@ -1,5 +1,9 @@
 package it.progetto.dto;
 
+/**
+ * DTO che rappresenta il dettaglio di una richiesta di supporto visualizzata
+ * dal Mentore.
+ */
 public class RichiesteSupportoDTO {
     private final int requestId;
     private final int hackathonId;
@@ -20,8 +24,7 @@ public class RichiesteSupportoDTO {
             String stato,
             String descrizione,
             String disponibilita,
-            String storico
-    ) {
+            String storico) {
         this.requestId = requestId;
         this.hackathonId = hackathonId;
         this.teamName = teamName;

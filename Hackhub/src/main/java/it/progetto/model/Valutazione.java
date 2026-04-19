@@ -1,15 +1,16 @@
 package it.progetto.model;
 
 public class Valutazione {
-    private final int id;
+    private final int valutazioneId;
     private final int giudiceId;
     private final int hackathonId;
     private final int submissionId;
     private final String commento;
     private final int punteggio;
 
-    public Valutazione(int id, int giudiceId, int hackathonId, int submissionId, String commento, int punteggio) {
-        this.id = id;
+    public Valutazione(int valutazioneId, int giudiceId, int hackathonId, int submissionId, String commento,
+            int punteggio) {
+        this.valutazioneId = valutazioneId;
         this.giudiceId = giudiceId;
         this.hackathonId = hackathonId;
         this.submissionId = submissionId;
@@ -18,7 +19,7 @@ public class Valutazione {
     }
 
     public int getId() {
-        return id;
+        return valutazioneId;
     }
 
     public int getGiudiceId() {

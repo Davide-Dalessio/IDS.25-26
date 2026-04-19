@@ -18,9 +18,6 @@ public class CallRequest {
         this.periodo = periodo;
     }
 
-    public CallRequest() {
-    }
-
     public int getRequestId() {
         return requestId;
     }

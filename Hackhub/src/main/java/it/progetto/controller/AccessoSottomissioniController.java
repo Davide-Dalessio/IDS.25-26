@@ -14,7 +14,7 @@ public class AccessoSottomissioniController {
     }
 
     public List<Integer> requestHackathonList(int staffId) {
-        return service.getHackathonList();
+        return service.getHackathonListByStaff(staffId);
     }
 
     public AccessoSottomissioniRequest createRequest(int hackathonId, int staffId, int teamId) {

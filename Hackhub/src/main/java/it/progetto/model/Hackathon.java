@@ -82,4 +82,8 @@ public class Hackathon {
     public EventManager getEvents() {
         return this.events;
     }
+
+    public void notificaMentori(int hackathonId) {
+        events.notify("nuova_richiesta", "Nuova richiesta di supporto per l'hackathon " + hackathonId);
+    }
 }
