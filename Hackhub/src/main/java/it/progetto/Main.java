@@ -8,6 +8,7 @@ import it.progetto.view.IInviaSottomissione;
 import it.progetto.view.IValutazioneSottomissione;
 import it.progetto.view.IAccedereSottomissioni;
 import it.progetto.view.IProclamaVincitore;
+import it.progetto.view.IVisualizzaRichiesteSupporto;
 
 public class Main {
     public static void main(String[] args) {
@@ -243,6 +244,47 @@ public class Main {
                 50,
                 1,
                 999   // team che simula errore pagamento
+        );
+
+        // ================================
+        // TEST VISUALIZZARE RICHIESTE DI SUPPORTO
+        // ================================
+
+        IVisualizzaRichiesteSupporto richiesteSupportoUI = new IVisualizzaRichiesteSupporto();
+
+        System.out.println("\n--- TEST VISUALIZZAZIONE RICHIESTE VALIDA ---");
+        richiesteSupportoUI.visualizzaRichiesteSupporto(
+                10,   // mentorId assegnato
+                1,    // hackathon valido
+                101   // request valida
+        );
+
+        System.out.println("\n--- TEST HACKATHON NON ESISTENTE ---");
+        richiesteSupportoUI.visualizzaRichiesteSupporto(
+                10,
+                999,  // hackathon non esistente
+                101
+        );
+
+        System.out.println("\n--- TEST MENTORE NON ASSEGNATO ---");
+        richiesteSupportoUI.visualizzaRichiesteSupporto(
+                99,   // mentore non assegnato
+                1,
+                101
+        );
+
+        System.out.println("\n--- TEST NESSUNA RICHIESTA DI SUPPORTO ---");
+        richiesteSupportoUI.visualizzaRichiesteSupporto(
+                10,
+                2,    // hackathon senza richieste
+                999
+        );
+
+        System.out.println("\n--- TEST RICHIESTA NON VALIDA PER HACKATHON ---");
+        richiesteSupportoUI.visualizzaRichiesteSupporto(
+                10,
+                1,
+                201   // richiesta non appartenente all'hackathon 1
         );
     }
 }
