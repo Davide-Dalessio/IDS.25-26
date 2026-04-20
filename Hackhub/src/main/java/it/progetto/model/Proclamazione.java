@@ -4,13 +4,13 @@ public class Proclamazione {
     private final int organizzatoreId;
     private final int hackathonId;
     private final int teamId;
-    private final boolean pagamentoEseguito;
+    private boolean pagamentoEseguito;
 
-    public Proclamazione(int organizzatoreId, int hackathonId, int teamId, boolean pagamentoEseguito) {
+    public Proclamazione(int organizzatoreId, int hackathonId, int teamId) {
         this.organizzatoreId = organizzatoreId;
         this.hackathonId = hackathonId;
         this.teamId = teamId;
-        this.pagamentoEseguito = pagamentoEseguito;
+        this.pagamentoEseguito = false;
     }
 
     public int getOrganizzatoreId() {
@@ -27,5 +27,9 @@ public class Proclamazione {
 
     public boolean isPagamentoEseguito() {
         return pagamentoEseguito;
+    }
+
+    public void setPagamentoEseguito(boolean pagamentoEseguito) {
+        this.pagamentoEseguito = pagamentoEseguito;
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
-    private int id;
+    private int teamId;
     private String nome;
     private List<Utente> membri;
 
@@ -13,11 +13,11 @@ public class Team {
     }
 
     public int getId() {
-        return id;
+        return teamId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int teamId) {
+        this.teamId = teamId;
     }
 
     public String getNome() {

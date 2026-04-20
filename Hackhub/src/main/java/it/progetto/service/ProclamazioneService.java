@@ -38,13 +38,11 @@ public class ProclamazioneService {
         teamEvaluationListMap.put(1, Arrays.asList(
                 "Team 1 - media 8.5",
                 "Team 2 - media 7.8",
-                "Team 3 - media 9.1"
-        ));
+                "Team 3 - media 9.1"));
 
         teamEvaluationListMap.put(2, Arrays.asList(
                 "Team 4 - media 8.0",
-                "Team 5 - media 7.2"
-        ));
+                "Team 5 - media 7.2"));
 
         // hackathon 4 senza submission
         teamEvaluationListMap.put(4, new ArrayList<>());
@@ -76,19 +74,18 @@ public class ProclamazioneService {
             throw new IllegalArgumentException("Non esistono sottomissioni per l'hackathon.");
         }
 
-        boolean pagamentoEseguito = requestPrizePayment(request.getTeamId(), request.getHackathonId());
-
-        Proclamazione proclamazione = builder.createProclamazione(request, pagamentoEseguito);
+        Proclamazione proclamazione = builder.createProclamazione(request);
         proclamazioniSalvate.add(proclamazione);
 
         updateHackathonStatus(request.getHackathonId(), "CONCLUSO");
 
+        new SistemaDiPagamento().runTask(request.getHackathonId());
+
         return new ProclamazioneDTO(
                 request.getHackathonId(),
                 request.getTeamId(),
-                pagamentoEseguito,
-                "Team vincitore proclamato con successo."
-        );
+                false,
+                "Team vincitore proclamato con successo. Attesa dati bancari.");
     }
 
     public void verifyOrganizerAuthorization(int hackathonId, int organizzatoreId) {
@@ -118,13 +115,5 @@ public class ProclamazioneService {
 
     public void updateHackathonStatus(int hackathonId, String nuovoStato) {
         statoHackathonMap.put(hackathonId, nuovoStato);
-    }
-
-    public boolean requestPrizePayment(int teamId, int hackathonId) {
-        // Simulazione: se il teamId è 999 errore pagamento
-        if (teamId == 999) {
-            throw new IllegalArgumentException("Esito negativo o nessuna risposta dal Sistema di Pagamento.");
-        }
-        return true;
     }
 }

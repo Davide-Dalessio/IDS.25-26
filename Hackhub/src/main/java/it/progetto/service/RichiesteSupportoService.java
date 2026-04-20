@@ -2,6 +2,7 @@ package it.progetto.service;
 
 import it.progetto.dto.RichiesteSupportoDTO;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class RichiesteSupportoService {
@@ -30,36 +31,33 @@ public class RichiesteSupportoService {
                 1,
                 "Team Alpha",
                 "Backend",
-                "2026-03-20",
+                LocalDate.parse("2026-03-20"),
                 "Aperta",
                 "Supporto su integrazione API",
                 "Mattina / Pomeriggio",
-                "Nessun contatto precedente"
-        ));
+                "Nessun contatto precedente"));
 
         supportRequestDetails.put(102, new RichiesteSupportoDTO(
                 102,
                 1,
                 "Team Beta",
                 "Database",
-                "2026-03-21",
+                LocalDate.parse("2026-03-21"),
                 "In lavorazione",
                 "Problema con schema relazionale",
                 "Solo pomeriggio",
-                "Richiesta aggiornata una volta"
-        ));
+                "Richiesta aggiornata una volta"));
 
         supportRequestDetails.put(201, new RichiesteSupportoDTO(
                 201,
                 3,
                 "Team Gamma",
                 "Frontend",
-                "2026-03-22",
+                LocalDate.parse("2026-03-22"),
                 "Aperta",
                 "Supporto UI responsive",
                 "Libero tutto il giorno",
-                "Nessuno storico"
-        ));
+                "Nessuno storico"));
     }
 
     public List<Integer> getAssignedHackathons(int mentorId) {

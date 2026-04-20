@@ -1,5 +1,7 @@
 package it.progetto.dto;
 
+import java.time.LocalDate;
+
 /**
  * DTO che rappresenta il dettaglio di una richiesta di supporto visualizzata
  * dal Mentore.
@@ -9,7 +11,7 @@ public class RichiesteSupportoDTO {
     private final int hackathonId;
     private final String teamName;
     private final String categoria;
-    private final String data;
+    private final LocalDate data;
     private final String stato;
     private final String descrizione;
     private final String disponibilita;
@@ -20,7 +22,7 @@ public class RichiesteSupportoDTO {
             int hackathonId,
             String teamName,
             String categoria,
-            String data,
+            LocalDate data,
             String stato,
             String descrizione,
             String disponibilita,
@@ -52,7 +54,7 @@ public class RichiesteSupportoDTO {
         return categoria;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 

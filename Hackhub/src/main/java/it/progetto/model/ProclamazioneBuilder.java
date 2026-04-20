@@ -3,5 +3,5 @@ package it.progetto.model;
 import it.progetto.dto.ProclamazioneRequest;
 
 public interface ProclamazioneBuilder {
-    Proclamazione createProclamazione(ProclamazioneRequest request, boolean pagamentoEseguito);
+    Proclamazione createProclamazione(ProclamazioneRequest request);
 }

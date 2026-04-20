@@ -34,7 +34,8 @@ public class RichiestaSupportoService {
     }
 
     public RichiestaSupportoDTO requestRichiesta(RichiestaSupportoRequest request) {
-        RichiestaSupporto richiesta = new RichiestaSupporto(request.getTeamId(), request.getHackathonId(), request.getMsg());
+        RichiestaSupporto richiesta = new RichiestaSupporto(request.getTeamId(), request.getHackathonId(),
+                request.getMsg());
 
         save(richiesta);
 
@@ -46,7 +47,8 @@ public class RichiestaSupportoService {
 
     private void save(RichiestaSupporto richiesta) {
         richiesteRepository.add(richiesta);
-        System.out.println("RichiestaSupportoService: [MOCK-DB] Richiesta salvata -> Team " + richiesta.getTeamId() + " Hackathon " + richiesta.getHackathonId());
+        System.out.println("RichiestaSupportoService: [MOCK-DB] Richiesta salvata -> Team " + richiesta.getTeamId()
+                + " Hackathon " + richiesta.getHackathonId());
     }
 
     private Hackathon getHackathonById(int hackathonId) {

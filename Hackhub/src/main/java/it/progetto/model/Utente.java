@@ -54,3 +54,4 @@ public class Utente implements IObserver {
         System.out.println("   [OBSERVER - BACHECA DI " + this.nome.toUpperCase() + "] Nuova notifica ricevuta: " + messaggio);
     }
 }
+

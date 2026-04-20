@@ -4,12 +4,11 @@ import it.progetto.dto.ProclamazioneRequest;
 
 public class ConcreteProclamazioneBuilder  implements ProclamazioneBuilder{
     @Override
-    public Proclamazione createProclamazione(ProclamazioneRequest request, boolean pagamentoEseguito) {
+    public Proclamazione createProclamazione(ProclamazioneRequest request) {
         return new Proclamazione(
                 request.getOrganizzatoreId(),
                 request.getHackathonId(),
-                request.getTeamId(),
-                pagamentoEseguito
+                request.getTeamId()
         );
     }
 }
