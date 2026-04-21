@@ -54,8 +54,8 @@ public class RichiestaSupportoService {
     private Hackathon getHackathonById(int hackathonId) {
         Hackathon h = new Hackathon();
         h.setNome("Hackathon " + hackathonId);
-        h.getEvents().subscribe("nuova_richiesta", new Utente(10, "Mentore Rossi", "rossi@mentor.com"));
-        h.getEvents().subscribe("nuova_richiesta", new Utente(11, "Mentore Bianchi", "bianchi@mentor.com"));
+        h.getEvents().subscribe("nuova_richiesta", new NotificaUtenteObserver(10));
+        h.getEvents().subscribe("nuova_richiesta", new NotificaUtenteObserver(11));
         return h;
     }
 }

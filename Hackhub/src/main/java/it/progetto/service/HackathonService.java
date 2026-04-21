@@ -5,15 +5,14 @@ import it.progetto.dto.HackathonRequest;
 import it.progetto.model.*;
 import java.time.LocalDate;
 import java.util.List;
+
 public class HackathonService {
 
     public HackathonDTO requestHackathon(HackathonRequest request) {
 
-        // Self Message: checkRequest
         System.out.println("Service: Eseguo checkRequest...");
         if (this.checkRequest(request)) {
 
-            // Messaggio: createHackathon(request)
             System.out.println("Service: Check superato. Avvio createHackathon tramite Builder...");
             return this.createHackathon(request);
         } else {
@@ -38,7 +37,6 @@ public class HackathonService {
 
         Hackathon h = builder.getResult();
 
-        // OUTPUT DI CONTROLLO (Simula il return hackathonDTO)
         System.out.println("\n--- OUTPUT DI VERIFICA (Simulazione DTO) ---");
         System.out.println("Nome Hackathon: " + h.getNome());
         System.out.println("Data Inizio:    " + h.getDataInizio());
@@ -55,16 +53,15 @@ public class HackathonService {
         LocalDate oggi = LocalDate.now();
 
         for (Hackathon h : lista) {
-            if (h.getStato() == StatoHackathon.IN_ISCRIZIONE && 
-               (oggi.isEqual(h.getDataInizio()) || oggi.isAfter(h.getDataInizio()))) {
-                
+            if (h.getStato() == StatoHackathon.IN_ISCRIZIONE &&
+                    (oggi.isEqual(h.getDataInizio()) || oggi.isAfter(h.getDataInizio()))) {
+
                 System.out.println("HackathonService: Trovato " + h.getNome() + " pronto per iniziare!");
                 h.setStato(StatoHackathon.IN_CORSO);
                 this.mockSave(h);
-            }
-            else if (h.getStato() == StatoHackathon.IN_CORSO && 
+            } else if (h.getStato() == StatoHackathon.IN_CORSO &&
                     (oggi.isEqual(h.getDataFine()) || oggi.isAfter(h.getDataFine()))) {
-                
+
                 System.out.println("HackathonService: Trovato " + h.getNome() + " scaduto. Passo in valutazione!");
                 h.setStato(StatoHackathon.IN_VALUTAZIONE);
                 this.mockSave(h);
@@ -74,16 +71,16 @@ public class HackathonService {
 
     private List<Hackathon> getHackathonsAttivi() {
         java.util.List<Hackathon> listaMock = new java.util.ArrayList<>();
-        
+
         Hackathon h1 = new Hackathon();
         h1.setNome("Hackathon Alfa");
         h1.setStato(StatoHackathon.IN_ISCRIZIONE);
         h1.setDataInizio(LocalDate.now().minusDays(1));
         h1.setDataFine(LocalDate.now().plusDays(5));
-        
-        h1.getEvents().subscribe("cambio_fase", new Utente(1, "Davide", "davide@email.com"));
-        h1.getEvents().subscribe("cambio_fase", new Utente(2, "Professore", "prof@university.edu"));
-        
+
+        h1.getEvents().subscribe("cambio_fase", new NotificaUtenteObserver(1));
+        h1.getEvents().subscribe("cambio_fase", new NotificaUtenteObserver(2));
+
         listaMock.add(h1);
 
         Hackathon h2 = new Hackathon();
@@ -91,9 +88,9 @@ public class HackathonService {
         h2.setStato(StatoHackathon.IN_CORSO);
         h2.setDataInizio(LocalDate.now().minusDays(10));
         h2.setDataFine(LocalDate.now().minusDays(1));
-        
-        h2.getEvents().subscribe("cambio_fase", new Utente(3, "Alice", "alice@email.com"));
-        
+
+        h2.getEvents().subscribe("cambio_fase", new NotificaUtenteObserver(3));
+
         listaMock.add(h2);
 
         return listaMock;

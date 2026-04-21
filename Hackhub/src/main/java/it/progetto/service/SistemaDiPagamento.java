@@ -17,4 +17,8 @@ public class SistemaDiPagamento {
         h.setNome("Hackathon #" + hackathonId);
         return h;
     }
+
+    public void elaboraTransazione(String iban, double premio) {
+        System.out.println("   [SISTEMA ESTERNO] Transazione completata. Inviati " + premio + "€ all'IBAN " + iban);
+    }
 }

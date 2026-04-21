@@ -4,6 +4,8 @@ import it.progetto.model.IObserver;
 
 public class SistemaNotificaVincitori implements IObserver {
 
+    private final NotificaService notificaService = new NotificaService();
+
     @Override
     public void update(String data) {
         int hackathonId = Integer.parseInt(data);
@@ -14,12 +16,8 @@ public class SistemaNotificaVincitori implements IObserver {
 
         String msg = "Hai vinto l'Hackathon #" + hackathonId;
         for (it.progetto.model.Utente utente : membriTeam) {
-            inviaNotifica(msg, utente);
+            notificaService.inviaNotifica(msg, utente.getId());
         }
-    }
-
-    private void inviaNotifica(String msg, it.progetto.model.Utente utente) {
-        utente.update(msg);
     }
 
     private int getTeamVincitore(int hackathonId) {

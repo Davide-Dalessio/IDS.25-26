@@ -22,10 +22,13 @@ public class RichiesteSupportoController {
     }
 
     public List<Integer> requestSupportRequests(RichiesteSupportoRequest request) {
-        return service.requestSupportRequests(request);
+        return service.requestSupportRequests(request.getMentorId(), request.getHackathonId());
     }
 
     public RichiesteSupportoDTO getSupportRequestDetails(RichiesteSupportoRequest request) {
-        return service.getSupportRequestDetails(request);
+        return service.getSupportRequestDetails(
+                request.getMentorId(),
+                request.getHackathonId(),
+                request.getRequestId());
     }
 }
