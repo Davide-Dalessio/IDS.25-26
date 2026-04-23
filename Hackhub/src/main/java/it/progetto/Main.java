@@ -9,6 +9,7 @@ import it.progetto.view.IValutazioneSottomissione;
 import it.progetto.view.IAccedereSottomissioni;
 import it.progetto.view.IProclamaVincitore;
 import it.progetto.view.IVisualizzaRichiesteSupporto;
+import it.progetto.view.ILogin;
 
 public class Main {
     public static void main(String[] args) {
@@ -286,5 +287,20 @@ public class Main {
                 1,
                 201   // richiesta non appartenente all'hackathon 1
         );
+
+        // ========================================
+        // TEST FARE LOGIN
+        // ========================================
+
+        ILogin loginUI = new ILogin();
+
+        System.out.println("\n--- TEST LOGIN VALIDO ---");
+        loginUI.inserisciCredenziali("visitatore1@test.com", "password123");
+
+        System.out.println("\n--- TEST UTENTE NON ESISTENTE (Estensione 4.a) ---");
+        loginUI.inserisciCredenziali("falso@test.com", "password123");
+
+        System.out.println("\n--- TEST PASSWORD ERRATA (Estensione 5.a) ---");
+        loginUI.inserisciCredenziali("visitatore1@test.com", "passwordSbagliata");
     }
 }
