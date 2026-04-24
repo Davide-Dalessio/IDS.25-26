@@ -10,6 +10,7 @@ import it.progetto.view.IAccedereSottomissioni;
 import it.progetto.view.IProclamaVincitore;
 import it.progetto.view.IVisualizzaRichiesteSupporto;
 import it.progetto.view.ILogin;
+import it.progetto.view.IPaginaPrivata;
 
 public class Main {
     public static void main(String[] args) {
@@ -302,5 +303,8 @@ public class Main {
 
         System.out.println("\n--- TEST PASSWORD ERRATA (Estensione 5.a) ---");
         loginUI.inserisciCredenziali("visitatore1@test.com", "passwordSbagliata");
+        System.out.println("\n--- TEST LOGOUT ---");
+        IPaginaPrivata paginaPrivata = new IPaginaPrivata();
+        paginaPrivata.selezionaLogout();
     }
 }

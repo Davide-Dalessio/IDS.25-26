@@ -22,4 +22,9 @@ public class AutenticazioneController {
             return "VIEW: login_form";
         }
     }
+    public String eseguiLogout() {
+        autenticazioneService.eseguiLogout();
+        System.out.println("SYSTEM: Reindirizzamento alla pagina pubblica...");
+        return "REDIRECT:/home_pubblica";
+    }
 }

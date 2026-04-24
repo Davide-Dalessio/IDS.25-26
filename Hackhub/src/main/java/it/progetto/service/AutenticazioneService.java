@@ -31,4 +31,11 @@ public class AutenticazioneService {
         }
         return null;
     }
+    public void eseguiLogout() {
+        distruggiSessione();
+    }
+
+    private void distruggiSessione() {
+        System.out.println("SYSTEM: Sessione corrente dell'utente invalidata con successo.");
+    }
 }
