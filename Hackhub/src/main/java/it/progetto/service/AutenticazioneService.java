@@ -1,6 +1,8 @@
 package it.progetto.service;
+
 import it.progetto.model.Utente;
 import it.progetto.dto.LoginResponse;
+
 public class AutenticazioneService {
     public LoginResponse eseguiLogin(String email, String password) {
 
@@ -24,13 +26,15 @@ public class AutenticazioneService {
     // Metodo simulato per rimpiazzare l'accesso al DB
     private Utente findByEmailSimulato(String email) {
         if ("visitatore1@test.com".equals(email)) {
-            // Uso il costruttore (String nome, String email, String password) che hai definito
+            // Uso il costruttore (String nome, String email, String password) che hai
+            // definito
             Utente u = new Utente("Mario Rossi", email, "password123");
             u.setId(1); // Setto un ID fittizio
             return u;
         }
         return null;
     }
+
     public void eseguiLogout() {
         distruggiSessione();
     }

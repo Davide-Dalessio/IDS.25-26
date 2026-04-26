@@ -74,7 +74,11 @@ public class ProclamazioneService {
             throw new IllegalArgumentException("Non esistono sottomissioni per l'hackathon.");
         }
 
-        Proclamazione proclamazione = builder.createProclamazione(request);
+        builder.reset();
+        builder.setOrganizzatoreId(request.getOrganizzatoreId());
+        builder.setHackathonId(request.getHackathonId());
+        builder.setTeamId(request.getTeamId());
+        Proclamazione proclamazione = builder.getResult();
         proclamazioniSalvate.add(proclamazione);
 
         updateHackathonStatus(request.getHackathonId(), "CONCLUSO");

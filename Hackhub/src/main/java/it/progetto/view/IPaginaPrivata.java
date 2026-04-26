@@ -9,9 +9,9 @@ public class IPaginaPrivata {
         this.controller = new AutenticazioneController();
     }
 
-    public void selezionaLogout() {
+    public void logout() {
         System.out.println("UI: L'utente ha selezionato l'opzione 'Logout'...");
-        String vistaSuccessiva = controller.eseguiLogout();
+        String vistaSuccessiva = controller.logout();
 
         if ("REDIRECT:/home_pubblica".equals(vistaSuccessiva)) {
             IPaginaPubblica paginaPubblica = new IPaginaPubblica();

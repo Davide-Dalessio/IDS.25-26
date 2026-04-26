@@ -1,7 +1,9 @@
 package it.progetto.model;
 
-import it.progetto.dto.ProclamazioneRequest;
-
 public interface ProclamazioneBuilder {
-    Proclamazione createProclamazione(ProclamazioneRequest request);
+    void reset();
+    void setOrganizzatoreId(int id);
+    void setHackathonId(int id);
+    void setTeamId(int id);
+    Proclamazione getResult();
 }
