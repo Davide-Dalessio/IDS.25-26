@@ -42,6 +42,7 @@ public class HackathonService {
         builder.setDataFine(request.getDataFine());
         builder.setPremio(request.getPremio());
         builder.setOrganizzatoreID(request.getOrganizzatoreID());
+        builder.setMaxMembriTeam(request.getMaxMembriTeam());
         builder.setStato(StatoHackathon.IN_ISCRIZIONE);
 
         // Aggiunta Mentori
@@ -65,7 +66,7 @@ public class HackathonService {
         Hackathon h = builder.getResult();
         hackathonRepository.save(h);
 
-        return new HackathonDTO(h.getNome(), h.getDataInizio(), h.getDataFine(), h.getPremio(), h.getOrganizzatoreID());
+        return new HackathonDTO(h.getHackathonId(), h.getNome(), h.getDataInizio(), h.getDataFine(), h.getPremio(), h.getOrganizzatoreID());
     }
 
     public void aggiornaFasi() {

@@ -15,6 +15,7 @@ public class HackathonRequest {
     private LocalDate dataFine;
     private double premio;
     private int organizzatoreID;
+    private int maxMembriTeam;
     private java.util.List<Integer> mentoriIds;
     private java.util.List<Integer> giudiciIds;
 }

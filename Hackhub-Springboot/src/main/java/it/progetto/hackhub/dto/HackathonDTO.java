@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HackathonDTO {
+    private int hackathonId;
     private String nome;
     private LocalDate dataInizio;
     private LocalDate dataFine;

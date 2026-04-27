@@ -20,7 +20,15 @@ public class TeamService {
         this.utenteRepository = utenteRepository;
     }
 
+    public boolean checkTeam(int utenteID) {
+        if (teamRepository.existsByMembri_Id(utenteID)) {
+            throw new RuntimeException("L'utente con ID " + utenteID + " fa già parte di un team!");
+        }
+        return true;
+    }
+
     public TeamDTO requestTeam(TeamRequest request) {
+        this.checkTeam(request.getUtenteID());
         this.selfCheck(request);
 
         TeamBuilder builder = new ConcreteTeamBuilder();
@@ -40,8 +48,8 @@ public class TeamService {
     }
 
     private void selfCheck(TeamRequest request) {
-        if (request.getNomeTeam().equalsIgnoreCase("Esistente")) {
-            throw new RuntimeException("Nome team già occupato!");
+        if (teamRepository.existsByNome(request.getNomeTeam())) {
+            throw new RuntimeException("Nome team '" + request.getNomeTeam() + "' già occupato!");
         }
     }
 }
