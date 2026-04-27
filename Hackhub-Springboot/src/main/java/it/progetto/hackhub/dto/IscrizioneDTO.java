@@ -8,11 +8,9 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HackathonDTO {
+public class IscrizioneDTO {
+    private int teamId;
     private int hackathonId;
-    private String nome;
-    private LocalDate dataInizio;
-    private LocalDate dataFine;
-    private double premio;
-    private int organizzatoreID;
+    private String stato;
+    private LocalDate dataIscrizione;
 }

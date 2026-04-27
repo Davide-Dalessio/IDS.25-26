@@ -27,7 +27,12 @@ public class AutenticazioneService {
             return new LoginResponse(false, "Errore: Password errata.", null);
         }
 
+        SessionManager.getInstance().creaSessione(utenteTrovato);
         return new LoginResponse(true, "Login effettuato.", utenteTrovato);
+    }
+
+    public void logout() {
+        SessionManager.getInstance().invalidaSessione();
     }
 
     private boolean checkPassword(Utente utente, String password) {

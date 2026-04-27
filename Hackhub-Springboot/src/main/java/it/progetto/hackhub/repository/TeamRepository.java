@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
+    boolean existsByNome(String nome);
+    boolean existsByMembri_Id(int utenteId);
 }
