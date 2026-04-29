@@ -20,7 +20,8 @@ public class HackhubSpringbootApplication {
             HackathonRepository hackathonRepo,
             TeamRepository teamRepo,
             SottomissioneRepository sottomissioneRepo,
-            PartecipazioneRepository partecipazioneRepo) {
+            PartecipazioneRepository partecipazioneRepo,
+            RichiestaSupportoRepository richiestaSupportoRepo) {
 
         return args -> {
             System.out.println("\n--- SCENARIO TEST VALUTAZIONE E ACCESSO SOTTOMISSIONI ---");
@@ -29,6 +30,7 @@ public class HackhubSpringbootApplication {
             Utente giudice = utenteRepo.save(new Utente("Giudice Dredd", "giudice@test.it", "password"));
             Utente membro = utenteRepo.save(new Utente("Membro Team", "membro@test.it", "password"));
             Utente membro2 = utenteRepo.save(new Utente("Sviluppatore 2", "membro2@test.it", "password"));
+            Utente mentore = utenteRepo.save(new Utente("Mentore Esperto", "mentore@test.it", "password"));
             
             Hackathon hack = new Hackathon();
             hack.setNome("Hackathon Valutato");
@@ -61,6 +63,18 @@ public class HackhubSpringbootApplication {
 
             partecipazioneRepo.save(new Partecipazione(teamAttivo, hackInCorso));
 
+            hackInCorso.getMentori().add(mentore);
+            hackathonRepo.save(hackInCorso);
+
+            RichiestaSupporto richiesta1 = new RichiestaSupporto(teamAttivo.getTeamId(), hackInCorso.getHackathonId(), "Aiuto con l'integrazione API");
+            richiesta1.setCategoria("Backend");
+            richiesta1.setDisponibilita("Mattina / Pomeriggio");
+            RichiestaSupporto richiesta2 = new RichiestaSupporto(teamAttivo.getTeamId(), hackInCorso.getHackathonId(), "Problema con schema relazionale");
+            richiesta2.setCategoria("Database");
+            richiesta2.setDisponibilita("Solo pomeriggio");
+            richiestaSupportoRepo.save(richiesta1);
+            richiestaSupportoRepo.save(richiesta2);
+
             System.out.println("Dati pronti:");
             System.out.println("- ID Giudice: " + giudice.getId());
             System.out.println("- ID Hackathon Valutazione: " + hack.getHackathonId() + " (Stato: IN_VALUTAZIONE)");
@@ -68,6 +82,9 @@ public class HackhubSpringbootApplication {
             System.out.println("- ID Team 1: " + team.getTeamId());
             System.out.println("- ID Team 2: " + teamAttivo.getTeamId());
             System.out.println("- ID Sottomissione Iniziale: " + sottomissione.getSottomissioneId());
+            System.out.println("- ID Mentore: " + mentore.getId());
+            System.out.println("- ID Richiesta 1: " + richiesta1.getId());
+            System.out.println("- ID Richiesta 2: " + richiesta2.getId());
             System.out.println("-----------------------------------------------------------\n");
         };
     }

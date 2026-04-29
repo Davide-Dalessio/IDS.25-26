@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "c8d4c4d4-2e2e-5c5c-0c5c-0g0g0g0g0g0g",
+		"name": "Hackhub API Test - ECCEZIONI",
+		"description": "Collezione per testare i percorsi di errore (Unhappy Paths) di Hackhub.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "5. Mentoring e Supporto (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: Hackathon Non in Corso (Team)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"teamId\": 1,\n  \"hackathonId\": 1,\n  \"msg\": \"Questa richiesta fallirà perché l'hackathon 1 è in valutazione\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/supporto/richiesta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"supporto",
+								"richiesta"
+							]
+						}
+					}
+				},
+				{
+					"name": "❌ ERRORE: Mentore Non Assegnato",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mentorId\": 4,\n  \"hackathonId\": 2,\n  \"requestId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/supporto/mentore/dettaglio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"supporto",
+								"mentore",
+								"dettaglio"
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

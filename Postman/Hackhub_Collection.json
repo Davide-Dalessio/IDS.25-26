@@ -286,6 +286,122 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "5. Mentoring e Supporto",
+			"item": [
+				{
+					"name": "Crea Richiesta Supporto (Team)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"teamId\": 2,\n  \"hackathonId\": 2,\n  \"msg\": \"Abbiamo un problema critico con il database relazionale\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/supporto/richiesta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"supporto",
+								"richiesta"
+							]
+						}
+					}
+				},
+				{
+					"name": "Lista Hackathon Assegnati (Mentore)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/supporto/mentore/5/hackathons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"supporto",
+								"mentore",
+								"5",
+								"hackathons"
+							]
+						}
+					}
+				},
+				{
+					"name": "Lista Richieste per Hackathon (Mentore)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mentorId\": 5,\n  \"hackathonId\": 2,\n  \"requestId\": 0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/supporto/mentore/richieste",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"supporto",
+								"mentore",
+								"richieste"
+							]
+						}
+					}
+				},
+				{
+					"name": "Dettaglio Richiesta Supporto (Mentore)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mentorId\": 5,\n  \"hackathonId\": 2,\n  \"requestId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/supporto/mentore/dettaglio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"supporto",
+								"mentore",
+								"dettaglio"
+							]
+						}
+					}
+				}
+			]
 		}
 	]
 }
