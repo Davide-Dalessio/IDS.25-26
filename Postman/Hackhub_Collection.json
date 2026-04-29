@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "b9d3b3c3-1f1f-4b4b-9b4b-9f9f9f9f9f9f",
+		"name": "Hackhub API Test",
+		"description": "Collezione completa per testare tutti i moduli migrati di Hackhub.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Registrazione & Login",
+			"item": [
+				{
+					"name": "Registrazione Utente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Nuovo Utente\",\n  \"email\": \"nuovo@test.it\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"org@test.it\",\n  \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Gestione Team e Inviti",
+			"item": [
+				{
+					"name": "Crea Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomeTeam\": \"Team Postman\",\n  \"utenteID\": 5\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/teams/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"teams",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Invia Invito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mittenteID\": 5,\n  \"utenteID\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/inviti/invia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"inviti",
+								"invia"
+							]
+						}
+					}
+				},
+				{
+					"name": "Rispondi a Invito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"invitoId\": 1,\n  \"accetta\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/risposte/rispondi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"risposte",
+								"rispondi"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Sottomissione e Valutazione",
+			"item": [
+				{
+					"name": "Invia Sottomissione",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"teamId\": 2,\n  \"hackathonId\": 2,\n  \"link\": \"https://github.com/team1/progetto-finale\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sottomissioni/invia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sottomissioni",
+								"invia"
+							]
+						}
+					}
+				},
+				{
+					"name": "Lista Sottomissioni (Giudice)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"staffId\": 2,\n  \"hackathonId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/accessosottomissioni/lista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accessosottomissioni",
+								"lista"
+							]
+						}
+					}
+				},
+				{
+					"name": "Valuta Progetto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"giudiceId\": 2,\n  \"hackathonId\": 1,\n  \"submissionId\": 1,\n  \"commento\": \"Ottimo lavoro, interfaccia molto intuitiva.\",\n  \"punteggio\": 9\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/valutazioni/valuta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"valutazioni",
+								"valuta"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Proclamazione Finale",
+			"item": [
+				{
+					"name": "Proclama Vincitore",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organizzatoreId\": 1,\n  \"hackathonId\": 1,\n  \"teamId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/proclamazioni/proclama",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proclamazioni",
+								"proclama"
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

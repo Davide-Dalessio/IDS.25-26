@@ -34,21 +34,17 @@ public class SottomissioneService {
         Hackathon hackathon = hackathonRepository.findById(request.getHackathonId())
                 .orElseThrow(() -> new RuntimeException("Hackathon non trovato"));
 
-        // 1. Controllo Iscrizione (deve esistere una Partecipazione)
         if (!partecipazioneRepository.existsByTeam_TeamIdAndHackathon_HackathonId(request.getTeamId(), request.getHackathonId())) {
             throw new IllegalStateException("Il team non è iscritto a questo hackathon");
         }
 
-        // 2. Controllo Scadenza (Fase dell'hackathon)
         if (hackathon.getStato() != StatoHackathon.IN_CORSO) {
             throw new IllegalStateException("Impossibile inviare o aggiornare la sottomissione: l'hackathon non è in fase di svolgimento (IN_CORSO)");
         }
 
-        // 3. Gestione Sottomissione (Update o Create)
         Sottomissione s = sottomissioneRepository.findByTeam_TeamIdAndHackathon_HackathonId(request.getTeamId(), request.getHackathonId())
                 .orElse(new Sottomissione(team, hackathon, request.getLink()));
         
-        // Se esisteva già, aggiorno solo il link
         s.setLink(request.getLink());
         
         sottomissioneRepository.save(s);

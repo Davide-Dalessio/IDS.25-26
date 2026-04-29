@@ -45,7 +45,6 @@ public class HackathonService {
         builder.setMaxMembriTeam(request.getMaxMembriTeam());
         builder.setStato(StatoHackathon.IN_ISCRIZIONE);
 
-        // Aggiunta Mentori
         if (request.getMentoriIds() != null) {
             for (Integer id : request.getMentoriIds()) {
                 Utente u = utenteRepository.findById(id)
@@ -54,7 +53,6 @@ public class HackathonService {
             }
         }
 
-        // Aggiunta Giudici
         if (request.getGiudiciIds() != null) {
             for (Integer id : request.getGiudiciIds()) {
                 Utente u = utenteRepository.findById(id)
@@ -78,7 +76,6 @@ public class HackathonService {
                     (oggi.isEqual(h.getDataInizio()) || oggi.isAfter(h.getDataInizio()))) {
                 h.setStato(StatoHackathon.IN_CORSO);
                 hackathonRepository.save(h);
-                // Qui in futuro andrà la notifica tramite Spring Events
             } else if (h.getStato() == StatoHackathon.IN_CORSO &&
                     (oggi.isEqual(h.getDataFine()) || oggi.isAfter(h.getDataFine()))) {
                 h.setStato(StatoHackathon.IN_VALUTAZIONE);

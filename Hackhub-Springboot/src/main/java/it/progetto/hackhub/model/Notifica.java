@@ -17,7 +17,7 @@ public class Notifica {
     private int id;
 
     private String messaggio;
-    private int utenteId; // L'utente che riceve la notifica
+    private int utenteId;
     private LocalDateTime dataInvio;
     private boolean letta;
 

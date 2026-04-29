@@ -1,15 +1,11 @@
 package it.progetto.hackhub;
 
-import it.progetto.hackhub.controller.*;
-import it.progetto.hackhub.dto.*;
 import it.progetto.hackhub.model.*;
 import it.progetto.hackhub.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.time.LocalDate;
 
 @SpringBootApplication
 public class HackhubSpringbootApplication {
@@ -21,31 +17,58 @@ public class HackhubSpringbootApplication {
     @Bean
     public CommandLineRunner initData(
             UtenteRepository utenteRepo,
+            HackathonRepository hackathonRepo,
             TeamRepository teamRepo,
-            InvitoRepository invitoRepo) {
+            SottomissioneRepository sottomissioneRepo,
+            PartecipazioneRepository partecipazioneRepo) {
 
         return args -> {
-            System.out.println("\n--- SCENARIO DI TEST INVITI E RISPOSTE ---");
+            System.out.println("\n--- SCENARIO TEST VALUTAZIONE E ACCESSO SOTTOMISSIONI ---");
 
-            // 1. Creazione Utenti
-            Utente u1 = utenteRepo.save(new Utente("User Uno", "user1@test.it", "password"));
-            Utente u2 = utenteRepo.save(new Utente("User Due", "user2@test.it", "password"));
+            Utente org = utenteRepo.save(new Utente("Organizzatore", "org@test.it", "password"));
+            Utente giudice = utenteRepo.save(new Utente("Giudice Dredd", "giudice@test.it", "password"));
+            Utente membro = utenteRepo.save(new Utente("Membro Team", "membro@test.it", "password"));
+            Utente membro2 = utenteRepo.save(new Utente("Sviluppatore 2", "membro2@test.it", "password"));
+            
+            Hackathon hack = new Hackathon();
+            hack.setNome("Hackathon Valutato");
+            hack.setOrganizzatoreID(org.getId());
+            hack.setStato(StatoHackathon.IN_VALUTAZIONE);
+            hack.getGiudici().add(giudice);
+            hackathonRepo.save(hack);
 
-            // 2. Creazione Team Alpha (Utente 1 è membro)
-            Team teamAlpha = new Team();
-            teamAlpha.setNome("Team Alpha");
-            teamAlpha.getMembri().add(u1);
-            teamRepo.save(teamAlpha);
+            Team team = new Team();
+            team.setNome("Team Da Valutare");
+            team.getMembri().add(membro);
+            teamRepo.save(team);
 
-            // 3. Creazione Invito (Utente 1 invita Utente 2)
-            Invito invito = invitoRepo.save(new Invito(u1.getId(), u2.getId()));
+            partecipazioneRepo.save(new Partecipazione(team, hack));
 
-            System.out.println("Configurazione completata:");
-            System.out.println("- Utente 1 (Mittente) ID: " + u1.getId());
-            System.out.println("- Utente 2 (Invitato) ID: " + u2.getId());
-            System.out.println("- Team Alpha ID: " + teamAlpha.getTeamId());
-            System.out.println("- Invito Pendente ID: " + invito.getId());
-            System.out.println("------------------------------------------\n");
+            Sottomissione sottomissione = new Sottomissione(team, hack, "https://github.com/team/progetto");
+            sottomissioneRepo.save(sottomissione);
+
+            // SECONDO HACKATHON PER TEST SOTTOMISSIONE (IN_CORSO)
+            Hackathon hackInCorso = new Hackathon();
+            hackInCorso.setNome("Hackathon Attivo");
+            hackInCorso.setOrganizzatoreID(org.getId());
+            hackInCorso.setStato(StatoHackathon.IN_CORSO);
+            hackathonRepo.save(hackInCorso);
+
+            Team teamAttivo = new Team();
+            teamAttivo.setNome("Team Sviluppatori");
+            teamAttivo.getMembri().add(membro2);
+            teamRepo.save(teamAttivo);
+
+            partecipazioneRepo.save(new Partecipazione(teamAttivo, hackInCorso));
+
+            System.out.println("Dati pronti:");
+            System.out.println("- ID Giudice: " + giudice.getId());
+            System.out.println("- ID Hackathon Valutazione: " + hack.getHackathonId() + " (Stato: IN_VALUTAZIONE)");
+            System.out.println("- ID Hackathon Attivo: " + hackInCorso.getHackathonId() + " (Stato: IN_CORSO)");
+            System.out.println("- ID Team 1: " + team.getTeamId());
+            System.out.println("- ID Team 2: " + teamAttivo.getTeamId());
+            System.out.println("- ID Sottomissione Iniziale: " + sottomissione.getSottomissioneId());
+            System.out.println("-----------------------------------------------------------\n");
         };
     }
 }

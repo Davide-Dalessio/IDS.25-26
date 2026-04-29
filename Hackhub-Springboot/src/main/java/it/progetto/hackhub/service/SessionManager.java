@@ -10,7 +10,6 @@ public class SessionManager {
     private Utente utenteLoggato;
 
     private SessionManager() {
-        // Costruttore privato per impedire istanze multiple
     }
 
     public static SessionManager getInstance() {

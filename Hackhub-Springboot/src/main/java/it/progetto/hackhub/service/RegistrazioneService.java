@@ -20,7 +20,6 @@ public class RegistrazioneService {
     public RegistrazioneDTO processaRegistrazione(RegistrazioneRequest request) {
         checkDati(request);
         
-        // Controllo unicità email
         if (utenteRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email già registrata!");
         }
