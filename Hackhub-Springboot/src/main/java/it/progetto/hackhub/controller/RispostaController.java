@@ -19,6 +19,6 @@ public class RispostaController {
 
     @PostMapping("/rispondi")
     public RispostaDTO gestisciRisposta(@RequestBody RispostaRequest request) {
-        return rispostaService.gestisciRisposta(request);
+        return rispostaService.requestRisposta(request);
     }
 }

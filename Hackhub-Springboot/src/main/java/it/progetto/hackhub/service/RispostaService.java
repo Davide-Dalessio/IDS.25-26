@@ -22,7 +22,7 @@ public class RispostaService {
         this.utenteRepository = utenteRepository;
     }
 
-    public RispostaDTO gestisciRisposta(RispostaRequest request) {
+    public RispostaDTO requestRisposta(RispostaRequest request) {
 
         Invito invito = invitoRepository.findById(request.getInvitoId())
                 .orElseThrow(() -> new RuntimeException("Invito non trovato"));

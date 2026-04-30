@@ -19,6 +19,6 @@ public class AutenticazioneController {
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
-        return autenticazioneService.login(request.getEmail(), request.getPassword());
+        return autenticazioneService.eseguiLogin(request.getEmail(), request.getPassword());
     }
 }

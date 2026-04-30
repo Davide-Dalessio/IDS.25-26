@@ -16,7 +16,7 @@ public class AutenticazioneService {
         this.utenteRepository = utenteRepository;
     }
 
-    public LoginResponse login(String email, String password) {
+    public LoginResponse eseguiLogin(String email, String password) {
         Utente utenteTrovato = utenteRepository.findByEmail(email).orElse(null);
 
         if (utenteTrovato == null) {
@@ -31,7 +31,7 @@ public class AutenticazioneService {
         return new LoginResponse(true, "Login effettuato.", utenteTrovato);
     }
 
-    public void logout() {
+    public void eseguiLogout() {
         SessionManager.getInstance().invalidaSessione();
     }
 
