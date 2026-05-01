@@ -70,5 +70,113 @@
 				}
 			]
 		}
+	,
+		{
+			"name": "6. Call (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: Durata Mancante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestId\": 1,\n  \"mentorId\": 5,\n  \"hackathonId\": 2,\n  \"durata\": \"\",\n  \"note\": \"test\",\n  \"periodo\": \"2025-06-10\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calls/create",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "calls", "create"]
+						}
+					}
+				},
+				{
+					"name": "❌ ERRORE: Mentore Non Autorizzato",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestId\": 1,\n  \"mentorId\": 3,\n  \"hackathonId\": 2,\n  \"durata\": \"60 minuti\",\n  \"note\": \"test\",\n  \"periodo\": \"2025-06-10\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calls/create",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "calls", "create"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "7. Prenotazione Slot (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: SlotId Non Valido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+						"mode": "raw",
+						"raw": "{\n  \"slotIndex\": 0,\n  \"callId\": 1,\n  \"requestId\": 1,\n  \"teamId\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/slots/book",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "slots", "book"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "8. Pagamento (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: IBAN Troppo Corto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"iban\": \"IT123\",\n  \"intestatario\": \"Team Sviluppatori\",\n  \"hackathonId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pagamenti/paga",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "pagamenti", "paga"]
+						}
+					}
+				}
+			]
+		}
 	]
 }

@@ -24,7 +24,7 @@ public class SlotService {
 
         validateRequest(request);
 
-        checkSlotAvailability(request.getSlotId());
+        checkSlotAvailability(request.getCallId(), request.getSlotIndex());
 
         SlotBooking booking = createBooking(request);
 
@@ -32,12 +32,16 @@ public class SlotService {
 
         updateSupportRequest(request.getRequestId());
 
-        return new SlotDTO(request.getSlotId(), true);
+        return new SlotDTO(request.getSlotIndex(), true);
     }
 
     private void validateRequest(SlotRequest request) {
-        if (request.getSlotId() <= 0) {
+        if (request.getSlotIndex() <= 0) {
             throw new IllegalArgumentException("Slot non valido.");
+        }
+
+        if (request.getCallId() <= 0) {
+            throw new IllegalArgumentException("Call non valida.");
         }
 
         if (request.getRequestId() <= 0) {
@@ -49,15 +53,16 @@ public class SlotService {
         }
     }
 
-    private void checkSlotAvailability(int slotId) {
-        if (slotBookingRepository.existsById(slotId)) {
+    private void checkSlotAvailability(int callId, int slotIndex) {
+        if (slotBookingRepository.existsByCallIdAndSlotIndex(callId, slotIndex)) {
             throw new IllegalStateException("Slot non più disponibile.");
         }
     }
 
     private SlotBooking createBooking(SlotRequest request) {
         return new SlotBooking(
-                request.getSlotId(),
+                request.getSlotIndex(),
+                request.getCallId(),
                 request.getRequestId(),
                 request.getTeamId()
         );

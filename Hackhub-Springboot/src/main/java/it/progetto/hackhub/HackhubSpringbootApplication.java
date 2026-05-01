@@ -26,6 +26,11 @@ public class HackhubSpringbootApplication {
             RichiestaSupportoRepository richiestaSupportoRepo) {
 
         return args -> {
+            if (utenteRepo.count() > 0) {
+                System.out.println("\n--- DB già inizializzato, skip init data ---");
+                return;
+            }
+
             System.out.println("\n--- SCENARIO TEST VALUTAZIONE E ACCESSO SOTTOMISSIONI ---");
 
             Utente org = utenteRepo.save(new Utente("Organizzatore", "org@test.it", "password"));

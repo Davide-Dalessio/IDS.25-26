@@ -7,6 +7,94 @@
 	},
 	"item": [
 		{
+			"name": "0. Gestione Hackathon",
+			"item": [
+				{
+					"name": "Crea Hackathon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Nuovo Hackathon\",\n  \"dataInizio\": \"2025-06-01\",\n  \"dataFine\": \"2025-06-05\",\n  \"premio\": 1500.0,\n  \"organizzatoreID\": 1,\n  \"maxMembriTeam\": 5,\n  \"mentoriIds\": [5],\n  \"giudiciIds\": [2]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/hackathons/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hackathons",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Aggiorna Fasi (Manuale)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/hackathons/update-phases",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hackathons",
+								"update-phases"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "0.1 Iscrizione Team",
+			"item": [
+				{
+					"name": "Iscrivi Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"teamId\": 2,\n  \"hackathonId\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/iscrizioni/iscrivi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"iscrizioni",
+								"iscrivi"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
 			"name": "1. Registrazione & Login",
 			"item": [
 				{
@@ -398,6 +486,90 @@
 								"mentore",
 								"dettaglio"
 							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "6. Call (Mentore propone disponibilità)",
+			"item": [
+				{
+					"name": "Crea Call (Mentore)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestId\": 1,\n  \"mentorId\": 5,\n  \"hackathonId\": 2,\n  \"durata\": \"60 minuti\",\n  \"note\": \"Porta la documentazione del progetto\",\n  \"periodo\": \"2025-06-10\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calls/create",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "calls", "create"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "7. Prenotazione Slot (Team sceglie orario)",
+			"item": [
+				{
+					"name": "Prenota Slot (Team)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+						"mode": "raw",
+						"raw": "{\n  \"slotIndex\": 1,\n  \"callId\": 1,\n  \"requestId\": 1,\n  \"teamId\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/slots/book",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "slots", "book"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "8. Pagamento Premio",
+			"item": [
+				{
+					"name": "Richiedi Pagamento Premio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"iban\": \"IT60X0542811101000000123456\",\n  \"intestatario\": \"Team Sviluppatori\",\n  \"hackathonId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pagamenti/paga",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "pagamenti", "paga"]
 						}
 					}
 				}

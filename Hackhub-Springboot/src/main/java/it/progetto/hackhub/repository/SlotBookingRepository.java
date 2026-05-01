@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SlotBookingRepository extends JpaRepository<SlotBooking, Integer> {
+    boolean existsByCallIdAndSlotIndex(int callId, int slotIndex);
 }
