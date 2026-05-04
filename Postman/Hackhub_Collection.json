@@ -511,9 +511,15 @@
 						"url": {
 							"raw": "http://localhost:8080/api/calls/create",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "calls", "create"]
+							"path": [
+								"api",
+								"calls",
+								"create"
+							]
 						}
 					}
 				}
@@ -533,15 +539,21 @@
 							}
 						],
 						"body": {
-						"mode": "raw",
-						"raw": "{\n  \"slotIndex\": 1,\n  \"callId\": 1,\n  \"requestId\": 1,\n  \"teamId\": 2\n}"
+							"mode": "raw",
+							"raw": "{\n  \"slotIndex\": 1,\n  \"callId\": 1,\n  \"requestId\": 1,\n  \"teamId\": 2\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/slots/book",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "slots", "book"]
+							"path": [
+								"api",
+								"slots",
+								"book"
+							]
 						}
 					}
 				}
@@ -567,9 +579,15 @@
 						"url": {
 							"raw": "http://localhost:8080/api/pagamenti/paga",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "pagamenti", "paga"]
+							"path": [
+								"api",
+								"pagamenti",
+								"paga"
+							]
 						}
 					}
 				}

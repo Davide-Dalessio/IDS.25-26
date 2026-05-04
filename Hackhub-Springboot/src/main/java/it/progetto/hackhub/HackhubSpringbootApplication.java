@@ -82,16 +82,32 @@ public class HackhubSpringbootApplication {
             richiestaSupportoRepo.save(richiesta1);
             richiestaSupportoRepo.save(richiesta2);
 
+            // TERZO HACKATHON PER TEST ISCRIZIONE (IN_ISCRIZIONE)
+            Hackathon hackIscrizione = new Hackathon();
+            hackIscrizione.setNome("Hackathon Nuove Idee");
+            hackIscrizione.setOrganizzatoreID(org.getId());
+            hackIscrizione.setStato(StatoHackathon.IN_ISCRIZIONE);
+            hackIscrizione.setDataInizio(java.time.LocalDate.now().plusDays(7));
+            hackIscrizione.setDataFine(java.time.LocalDate.now().plusDays(10));
+            hackIscrizione.setMaxMembriTeam(4);
+            hackathonRepo.save(hackIscrizione);
+
+            // UTENTI LIBERI PER TEST REGISTRAZIONE/INVITO
+            Utente libero1 = utenteRepo.save(new Utente("Mario Rossi", "mario@test.it", "password"));
+            Utente libero2 = utenteRepo.save(new Utente("Luigi Bianchi", "luigi@test.it", "password"));
+
             System.out.println("Dati pronti:");
             System.out.println("- ID Giudice: " + giudice.getId());
             System.out.println("- ID Hackathon Valutazione: " + hack.getHackathonId() + " (Stato: IN_VALUTAZIONE)");
             System.out.println("- ID Hackathon Attivo: " + hackInCorso.getHackathonId() + " (Stato: IN_CORSO)");
+            System.out.println("- ID Hackathon Iscrizioni: " + hackIscrizione.getHackathonId() + " (Stato: IN_ISCRIZIONE)");
             System.out.println("- ID Team 1: " + team.getTeamId());
             System.out.println("- ID Team 2: " + teamAttivo.getTeamId());
             System.out.println("- ID Sottomissione Iniziale: " + sottomissione.getSottomissioneId());
             System.out.println("- ID Mentore: " + mentore.getId());
             System.out.println("- ID Richiesta 1: " + richiesta1.getId());
             System.out.println("- ID Richiesta 2: " + richiesta2.getId());
+            System.out.println("- ID Utenti Liberi: " + libero1.getId() + ", " + libero2.getId());
             System.out.println("-----------------------------------------------------------\n");
         };
     }

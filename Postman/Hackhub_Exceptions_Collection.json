@@ -7,6 +7,69 @@
 	},
 	"item": [
 		{
+			"name": "1. Registrazione & Login (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: Email Già Esistente",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Duplicato\",\n  \"email\": \"org@test.it\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "register"] }
+					}
+				},
+				{
+					"name": "❌ ERRORE: Password Errata",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"org@test.it\",\n  \"password\": \"sbagliata\"\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "login"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Gestione Team (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: Nome Team Già Occupato",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomeTeam\": \"Team Sviluppatori\",\n  \"utenteID\": 6\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/teams/create", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "teams", "create"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Valutazione (Eccezioni)",
+			"item": [
+				{
+					"name": "❌ ERRORE: Valutazione Duplicata",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"giudiceId\": 2,\n  \"hackathonId\": 1,\n  \"submissionId\": 1,\n  \"commento\": \"Provo a votare di nuovo\",\n  \"punteggio\": 8\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/valutazioni/valuta", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "valutazioni", "valuta"] }
+					}
+				}
+			]
+		},
+		{
 			"name": "5. Mentoring e Supporto (Eccezioni)",
 			"item": [
 				{
@@ -69,8 +132,7 @@
 					}
 				}
 			]
-		}
-	,
+		},
 		{
 			"name": "6. Call (Eccezioni)",
 			"item": [
@@ -91,9 +153,15 @@
 						"url": {
 							"raw": "http://localhost:8080/api/calls/create",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "calls", "create"]
+							"path": [
+								"api",
+								"calls",
+								"create"
+							]
 						}
 					}
 				},
@@ -114,9 +182,15 @@
 						"url": {
 							"raw": "http://localhost:8080/api/calls/create",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "calls", "create"]
+							"path": [
+								"api",
+								"calls",
+								"create"
+							]
 						}
 					}
 				}
@@ -136,15 +210,21 @@
 							}
 						],
 						"body": {
-						"mode": "raw",
-						"raw": "{\n  \"slotIndex\": 0,\n  \"callId\": 1,\n  \"requestId\": 1,\n  \"teamId\": 2\n}"
+							"mode": "raw",
+							"raw": "{\n  \"slotIndex\": 0,\n  \"callId\": 1,\n  \"requestId\": 1,\n  \"teamId\": 2\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/slots/book",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "slots", "book"]
+							"path": [
+								"api",
+								"slots",
+								"book"
+							]
 						}
 					}
 				}
@@ -170,9 +250,15 @@
 						"url": {
 							"raw": "http://localhost:8080/api/pagamenti/paga",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8080",
-							"path": ["api", "pagamenti", "paga"]
+							"path": [
+								"api",
+								"pagamenti",
+								"paga"
+							]
 						}
 					}
 				}
