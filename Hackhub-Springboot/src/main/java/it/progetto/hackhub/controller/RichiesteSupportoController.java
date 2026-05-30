@@ -2,6 +2,7 @@ package it.progetto.hackhub.controller;
 
 import it.progetto.hackhub.dto.RichiesteSupportoDTO;
 import it.progetto.hackhub.dto.RichiesteSupportoRequest;
+import it.progetto.hackhub.dto.MentoreHackathonRequest;
 import it.progetto.hackhub.service.RichiesteSupportoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class RichiesteSupportoController {
     }
 
     @PostMapping("/richieste")
-    public ResponseEntity<?> requestSupportRequests(@RequestBody RichiesteSupportoRequest request) {
+    public ResponseEntity<?> requestSupportRequests(@RequestBody MentoreHackathonRequest request) {
         try {
             List<Integer> richieste = richiesteSupportoService.requestSupportRequests(request.getMentorId(), request.getHackathonId());
             return ResponseEntity.ok(richieste);

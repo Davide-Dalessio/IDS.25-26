@@ -73,10 +73,12 @@ public class HackathonService {
 
         for (Hackathon h : lista) {
             if (h.getStato() == StatoHackathon.IN_ISCRIZIONE &&
+                    h.getDataInizio() != null &&
                     (oggi.isEqual(h.getDataInizio()) || oggi.isAfter(h.getDataInizio()))) {
                 h.setStato(StatoHackathon.IN_CORSO);
                 hackathonRepository.save(h);
             } else if (h.getStato() == StatoHackathon.IN_CORSO &&
+                    h.getDataFine() != null &&
                     (oggi.isEqual(h.getDataFine()) || oggi.isAfter(h.getDataFine()))) {
                 h.setStato(StatoHackathon.IN_VALUTAZIONE);
                 hackathonRepository.save(h);
