@@ -3,7 +3,10 @@ package it.progetto.hackhub.service;
 import it.progetto.hackhub.dto.PagamentoRequest;
 import it.progetto.hackhub.dto.RicevutaDTO;
 import it.progetto.hackhub.model.Ricevuta;
+import it.progetto.hackhub.model.Hackathon;
 import it.progetto.hackhub.repository.RicevutaRepository;
+import it.progetto.hackhub.repository.ProclamazioneRepository;
+import it.progetto.hackhub.repository.HackathonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +19,21 @@ public class PagamentoService {
     private RicevutaRepository ricevutaRepository;
 
     @Autowired
+    private ProclamazioneRepository proclamazioneRepository;
+
+    @Autowired
+    private HackathonRepository hackathonRepository;
+
+    @Autowired
     private SistemaDiPagamento sistemaDiPagamento;
 
     public RicevutaDTO requestPagamento(PagamentoRequest request) {
         checkdati(request);
 
-        double premio = 1000.00;
+        Hackathon hackathon = hackathonRepository.findById(request.getHackathonId())
+                .orElseThrow(() -> new IllegalArgumentException("Errore: Hackathon non trovato."));
+
+        double premio = hackathon.getPremio();
 
         elaboraTransazione(request.getIban(), premio);
 
@@ -44,6 +56,13 @@ public class PagamentoService {
     private RicevutaDTO newRicevuta(PagamentoRequest request, double premio) {
         Ricevuta ricevuta = new Ricevuta(request.getHackathonId(), request.getIban(), premio);
         ricevutaRepository.save(ricevuta);
+
+        proclamazioneRepository.findAll().stream()
+                .filter(p -> p.getHackathonId() == request.getHackathonId())
+                .forEach(p -> {
+                    p.setPagamentoEseguito(true);
+                    proclamazioneRepository.save(p);
+                });
 
         return new RicevutaDTO("Transazione Completata", premio);
     }

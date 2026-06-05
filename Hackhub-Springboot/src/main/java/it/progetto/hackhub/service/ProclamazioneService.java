@@ -6,6 +6,7 @@ import it.progetto.hackhub.model.*;
 import it.progetto.hackhub.repository.HackathonRepository;
 import it.progetto.hackhub.repository.ProclamazioneRepository;
 import it.progetto.hackhub.repository.TeamRepository;
+import it.progetto.hackhub.repository.RicevutaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +18,19 @@ public class ProclamazioneService {
     private final HackathonRepository hackathonRepository;
     private final TeamRepository teamRepository;
     private final SistemaDiPagamento sistemaDiPagamento;
+    private final RicevutaRepository ricevutaRepository;
 
     @Autowired
     public ProclamazioneService(ProclamazioneRepository proclamazioneRepository,
                                HackathonRepository hackathonRepository,
                                TeamRepository teamRepository,
-                               SistemaDiPagamento sistemaDiPagamento) {
+                               SistemaDiPagamento sistemaDiPagamento,
+                               RicevutaRepository ricevutaRepository) {
         this.proclamazioneRepository = proclamazioneRepository;
         this.hackathonRepository = hackathonRepository;
         this.teamRepository = teamRepository;
         this.sistemaDiPagamento = sistemaDiPagamento;
+        this.ricevutaRepository = ricevutaRepository;
     }
 
     public ProclamazioneDTO proclaimWinner(ProclamazioneRequest request) {
@@ -47,6 +51,10 @@ public class ProclamazioneService {
         builder.setTeamId(request.getTeamId());
         Proclamazione proclamazione = builder.getResult();
         
+        boolean checkPagamento = ricevutaRepository.findAll().stream()
+                .anyMatch(r -> r.getHackathonId() == request.getHackathonId());
+        proclamazione.setPagamentoEseguito(checkPagamento);
+        
         proclamazioneRepository.save(proclamazione);
 
         hackathon.setStato(StatoHackathon.CONCLUSO);
@@ -57,7 +65,7 @@ public class ProclamazioneService {
         return new ProclamazioneDTO(
                 request.getHackathonId(),
                 request.getTeamId(),
-                false,
-                "Team vincitore proclamato con successo. Attesa dati bancari.");
+                checkPagamento,
+                checkPagamento ? "Team vincitore proclamato con successo. Pagamento completato." : "Team vincitore proclamato con successo. Attesa dati bancari.");
     }
 }
